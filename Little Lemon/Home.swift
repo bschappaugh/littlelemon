@@ -11,6 +11,7 @@ struct Home: View {
     let persistence = PersistenceController.shared
     
     var body: some View {
+        Header(withProfileIcon: true)
         TabView{
             Menu()
                 .environment(\.managedObjectContext, persistence.container.viewContext)

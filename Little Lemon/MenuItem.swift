@@ -8,7 +8,14 @@
 import Foundation
 
 struct MenuItem: Decodable {
+    enum CodingKeys: String, CodingKey { case
+            title, image, price, category,
+            desc = "description"
+    }
+    
     let title: String
     let image: String
     let price: String
+    let desc: String
+    let category: String
 }

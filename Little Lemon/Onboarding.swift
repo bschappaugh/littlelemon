@@ -21,12 +21,38 @@ struct Onboarding: View {
     
     var body: some View {
         NavigationView{
-            VStack {
+            VStack(alignment: .leading) {
+                Header(withProfileIcon: false)
+                Hero()
 
                 NavigationLink(destination: Home(), isActive: $isLoggedIn) { EmptyView() }
+                
+                Text("First Name")
+                    .padding([.top, .leading, .trailing])
                 TextField("First Name", text: $firstName)
+                    .padding(10)
+                    .border(Color("Secondary 3"), width: 3)
+                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .padding([.leading, .bottom, .trailing])
+                
+                Text("Last Name")
+                    .padding(.horizontal)
                 TextField("Last Name", text: $lastName)
+                    .padding(10)
+                    .border(Color("Secondary 3"), width: 3)
+                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .padding([.leading, .bottom, .trailing])
+                
+                Text("Email")
+                    .padding(.horizontal)
                 TextField("Email", text: $email)
+                    .padding(10)
+                    .border(Color("Secondary 3"), width: 3)
+                    .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .padding(.horizontal)
+                    
+                    
+                Spacer()
                 Button(action: {
                     if (firstName.isEmpty || lastName.isEmpty || email.isEmpty) {
                         print("An Input Field Is Empty")
@@ -39,7 +65,13 @@ struct Onboarding: View {
                     }
                 }) {
                     Text("Register")
+                        .foregroundColor(Color("Secondary 4"))
+                        .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 }
+                .frame(maxWidth: .infinity)
+                .background(Color("Yellow"))
+                .cornerRadius(10)
+                .padding(.horizontal)
             }
             .onAppear(perform: {
                 if (UserDefaults.standard.bool(forKey: kIsLoggedIn)) {
