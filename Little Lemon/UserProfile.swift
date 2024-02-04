@@ -71,7 +71,7 @@ struct UserProfile: View {
                     .cornerRadius(10)
                     
                     NavigationLink {
-                        EmptyView()
+                        EditUserProfile()
                     } label: {
                         Text("Edit")
                     }
