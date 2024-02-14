@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct UserProfile: View {
-    let firstName = UserDefaults.standard.string(forKey: kFirstName)
-    let lastName = UserDefaults.standard.string(forKey: kLastName)
-    let email = UserDefaults.standard.string(forKey: kEmail)
+    @State var firstName = UserDefaults.standard.string(forKey: kFirstName)!
+    @State var lastName = UserDefaults.standard.string(forKey: kLastName)!
+    @State var email = UserDefaults.standard.string(forKey: kEmail)!
+    @State private var isDisabled = true
+    @State private var editLabel = "Edit"
     
     @Environment(\.presentationMode) var presentation
     
     var body: some View {
-            
-        NavigationView {
             VStack(alignment: .leading){
                 Text("Personal information")
                     .fontWeight(.bold)
@@ -28,30 +28,29 @@ struct UserProfile: View {
                 
                 Text("First name")
                     .padding(.top)
-                Text(firstName ?? "asdf")
+                TextField("First Name", text: $firstName)
                     .padding(10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .border(Color("Secondary 3"), width: 3)
                     .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .disabled(isDisabled)
 
                 
                 Text("Last name")
                     .padding(.top)
-                Text(lastName ?? "asdf")
+                TextField("Last Name", text: $lastName)
                     .padding(10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .border(Color("Secondary 3"), width: 3)
                     .clipShape(RoundedRectangle(cornerRadius: 5.0))
+                    .disabled(isDisabled)
                     
                 
                 Text("Email")
                     .padding(.top)
-                Text(email ?? "adsf")
+                TextField("Email", text: $email)
                     .padding(10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .border(Color("Secondary 3"), width: 3)
                     .clipShape(RoundedRectangle(cornerRadius: 5.0))
-                    .padding(.bottom)
+                    .disabled(isDisabled)
                 
                 Spacer()
                 
@@ -70,10 +69,19 @@ struct UserProfile: View {
                     .background(Color("Yellow"))
                     .cornerRadius(10)
                     
-                    NavigationLink {
-                        EmptyView()
-                    } label: {
-                        Text("Edit")
+                    Button(action: {
+                        if isDisabled == true {
+                            isDisabled.toggle()
+                            editLabel = "Save"
+                        } else {
+                            isDisabled.toggle()
+                            editLabel = "Edit"
+                            UserDefaults.standard.set(firstName, forKey: kFirstName)
+                            UserDefaults.standard.set(lastName, forKey: kLastName)
+                            UserDefaults.standard.set(email, forKey: kEmail)
+                        }
+                    }) {
+                        Text(editLabel)
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -85,10 +93,9 @@ struct UserProfile: View {
                 Spacer()
             }
             .padding()
-        }
     }
 }
 
-#Preview {
-    UserProfile()
-}
+//#Preview {
+//    UserProfile()
+//}
