@@ -21,6 +21,7 @@
 		FD2E2B862B27E05A002583E0 /* Little_LemonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E2B852B27E05A002583E0 /* Little_LemonApp.swift */; };
 		FD2E2B8A2B27E05B002583E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2E2B892B27E05B002583E0 /* Assets.xcassets */; };
 		FD2E2B8D2B27E05B002583E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD2E2B8C2B27E05B002583E0 /* Preview Assets.xcassets */; };
+		FD3F56692B8269B100DCA535 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3F56682B8269B100DCA535 /* ItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		FD2E2B852B27E05A002583E0 /* Little_LemonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Little_LemonApp.swift; sourceTree = "<group>"; };
 		FD2E2B892B27E05B002583E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD2E2B8C2B27E05B002583E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FD3F56682B8269B100DCA535 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				FD0AF82F2B364B5B007BC7D0 /* MenuList.swift */,
 				FD0AF8312B364B8B007BC7D0 /* MenuItem.swift */,
 				FD0AF8332B3660F3007BC7D0 /* ExampleDatabase.xcdatamodeld */,
+				FD3F56682B8269B100DCA535 /* ItemView.swift */,
 			);
 			path = "Little Lemon";
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				FD0AF8352B3660F3007BC7D0 /* ExampleDatabase.xcdatamodeld in Sources */,
 				FD0AF8372B375302007BC7D0 /* Hero.swift in Sources */,
 				FD0AF82A2B33D38A007BC7D0 /* UserProfile.swift in Sources */,
+				FD3F56692B8269B100DCA535 /* ItemView.swift in Sources */,
 				FD0AF8322B364B8B007BC7D0 /* MenuItem.swift in Sources */,
 				FD0AF8282B33BC95007BC7D0 /* Menu.swift in Sources */,
 				FD2E2B862B27E05A002583E0 /* Little_LemonApp.swift in Sources */,
