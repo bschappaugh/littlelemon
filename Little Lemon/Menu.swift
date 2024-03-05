@@ -59,103 +59,109 @@ struct Menu: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading){
-            VStack(){
-                Hero()
-                   
-                TextField("Search menu", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.all, 20)
-            }
-            .background(Color("Dark Green"))
-            
-            // Menu Breakdown
-            Text("ORDER FOR DELIVERY!")
-                .fontWeight(.bold)
-                .multilineTextAlignment(.leading)
-            ScrollView(.horizontal) {
-                HStack{
-                    Spacer()
-                    Toggle(isOn: $startersFilter) {
-                        Text("Starters")
-                            .foregroundColor(Color("Secondary 4"))
-                            .padding(6)
-                    }
-                    .background(Color("Secondary 3"))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .toggleStyle(.button)
-                    .tint(.black)
+            VStack(alignment: .leading){
+                VStack(){
+                    Hero()
                     
-                    Spacer()
-                    
-                    Toggle(isOn: $mainsFilter) {
-                        Text("Mains")
-                            .foregroundColor(Color("Secondary 4"))
-                            .padding(6)
-                    }
-                    .background(Color("Secondary 3"))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .toggleStyle(.button)
-                    .tint(.black)
-                    
-                    Spacer()
-                    
-                    Toggle(isOn: $dessertsFilter) {
-                        Text("Desserts")
-                            .foregroundColor(Color("Secondary 4"))
-                            .padding(6)
-                    }
-                    .background(Color("Secondary 3"))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .toggleStyle(.button)
-                    .tint(.black)
-                    
-                    Spacer()
-                    
-                    Toggle(isOn: $sidesFilter) {
-                        Text("Sides")
-                            .foregroundColor(Color("Secondary 4"))
-                            .padding(6)
-                    }
-                    .background(Color("Secondary 3"))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .toggleStyle(.button)
-                    .tint(.black)
-                    
-                    Spacer()
+                    TextField("Search menu", text: $searchText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.all, 20)
                 }
-            }
-            
-            // Menu Item List
-            FetchedObjects(predicate: buildPredicate(), sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
-            List {
-                ForEach(dishes) { dish in
+                .background(Color("Dark Green"))
+                
+                // Menu Breakdown
+                Text("ORDER FOR DELIVERY!")
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+                ScrollView(.horizontal) {
                     HStack{
-                        // Dish info
-                        VStack(alignment: .leading){
-                            Text(dish.title!)
-                                .fontWeight(.bold)
-                                .font(.system(size: 18))
-                            Text(dish.desc!)
-                                .lineLimit(2)
-                                .padding(.vertical, 0.5)
-                            Text("$\(dish.price!)")
-                                
+                        Spacer()
+                        Toggle(isOn: $startersFilter) {
+                            Text("Starters")
+                                .foregroundColor(Color("Secondary 4"))
+                                .padding(6)
                         }
+                        .background(Color("Secondary 3"))
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .toggleStyle(.button)
+                        .tint(.black)
                         
                         Spacer()
-                        // Dish image
-                        AsyncImage(url: URL(string: dish.image!)) { image in
-                            image.image?.resizable()
+                        
+                        Toggle(isOn: $mainsFilter) {
+                            Text("Mains")
+                                .foregroundColor(Color("Secondary 4"))
+                                .padding(6)
                         }
-                        .frame(width: 80, height: 80)
-                    } //:HStack
-                    .frame(maxWidth: .infinity)
+                        .background(Color("Secondary 3"))
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .toggleStyle(.button)
+                        .tint(.black)
+                        
+                        Spacer()
+                        
+                        Toggle(isOn: $dessertsFilter) {
+                            Text("Desserts")
+                                .foregroundColor(Color("Secondary 4"))
+                                .padding(6)
+                        }
+                        .background(Color("Secondary 3"))
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .toggleStyle(.button)
+                        .tint(.black)
+                        
+                        Spacer()
+                        
+                        Toggle(isOn: $sidesFilter) {
+                            Text("Sides")
+                                .foregroundColor(Color("Secondary 4"))
+                                .padding(6)
+                        }
+                        .background(Color("Secondary 3"))
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .toggleStyle(.button)
+                        .tint(.black)
+                        
+                        Spacer()
+                    }
                 }
-            } //:List
-        } //:FetchedObjects
-        } //:VStack
-        .onAppear(perform: { getMenuData() })
+                
+                // Menu Item List
+                FetchedObjects(predicate: buildPredicate(), sortDescriptors: buildSortDescriptors()) { (dishes: [Dish]) in
+                    List {
+                        ForEach(dishes) { dish in
+                            // Nav Link Here
+                            NavigationLink {
+                                ItemView(dishName: dish.title!, dishPrice: dish.price!, dishDescription: dish.desc!, dishImageURL: dish.image!)
+                            } label: {
+                                HStack{
+                                    // Dish info
+                                    VStack(alignment: .leading){
+                                        Text(dish.title!)
+                                            .fontWeight(.bold)
+                                            .font(.system(size: 18))
+                                        Text(dish.desc!)
+                                            .lineLimit(2)
+                                            .padding(.vertical, 0.5)
+                                        Text("$\(dish.price!)")
+                                        
+                                    }
+                                    
+                                    Spacer()
+                                    // Dish image
+                                    AsyncImage(url: URL(string: dish.image!)) { image in
+                                        image.image?.resizable()
+                                    }
+                                    .frame(width: 80, height: 80)
+                                } //:HStack
+                                .frame(maxWidth: .infinity)
+                            } //:NavigationLink
+                        }
+                    } //:List
+                } //:FetchedObjects
+            } //:VStack
+            .onAppear(perform: { getMenuData() })
+        
     }
 }
 
